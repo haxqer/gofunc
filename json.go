@@ -1,4 +1,4 @@
-package go_func
+package gofunc
 
 import (
 	"bytes"
