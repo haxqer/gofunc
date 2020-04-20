@@ -1,21 +1,19 @@
 package gofunc
 
 import (
-	"crypto/sha1"
+	"crypto/md5"
 	"encoding/hex"
 	"strings"
 )
 
-func Sha1Lower(s string) string {
-	h := sha1.New()
+func Md5Lower(s string) string {
+	h := md5.New()
 	h.Write([]byte(s))
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-func Sha1Upper(s string) string {
-	h := sha1.New()
+func Md5Upper(s string) string {
+	h := md5.New()
 	h.Write([]byte(s))
 	return strings.ToUpper(hex.EncodeToString(h.Sum(nil)))
 }
-
-
