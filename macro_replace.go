@@ -4,10 +4,7 @@ import (
 	"strings"
 )
 
-type Macro map[string][]string
-type MacroValue map[string]string
-
-func ReplaceMacro(str string, macro Macro, macroValue MacroValue) string {
+func ReplaceMacro(str string, macro map[string][]string, macroValue map[string]string) string {
 
 	for k, _mArr := range macro {
 		newValue := ""
