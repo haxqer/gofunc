@@ -75,7 +75,55 @@ func TestBase64Encode(t *testing.T) {
 	}
 }
 
+func BenchmarkBase64Encode(b *testing.B) {
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		Base64Encode("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_")
+	}
+}
+
 func TestBase64Decode(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    string
+		wantErr bool
+	}{
+		{name: "testCase01", args: args{s: "QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODk="},
+			want:    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := Base64Decode(tt.args.s)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Base64Decode() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Base64Decode() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func BenchmarkBase64Decode(b *testing.B) {
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		_, err := Base64Decode("QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODk=")
+		if err != nil {
+			b.Errorf("Base64Decode() error = %v ", err)
+		}
+	}
+}
+
+func TestBase64DecodeByte(t *testing.T) {
 	type args struct {
 		s string
 	}
@@ -92,13 +140,13 @@ func TestBase64Decode(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := Base64Decode(tt.args.s)
+			got, err := Base64DecodeByte(tt.args.s)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("Base64Decode() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("Base64DecodeByte() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Base64Decode() got = %v, want %v", got, tt.want)
+				t.Errorf("Base64DecodeByte() got = %v, want %v", got, tt.want)
 			}
 		})
 	}

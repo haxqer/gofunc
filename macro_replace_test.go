@@ -34,7 +34,7 @@ func TestReplaceMacro(t *testing.T) {
 	}
 }
 
-func BenchmarkGenTokenByMac(b *testing.B) {
+func BenchmarkReplaceMacro(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
