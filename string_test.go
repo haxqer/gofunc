@@ -163,6 +163,9 @@ func TestRFCEncode(t *testing.T) {
 	}{
 		{name: "testCase01", args: args{s: "sfadf fadsdfa+Sfd"}, want: "sfadf+fadsdfa%2BSfd"},
 		{name: "testCase02", args: args{s: ` "#%&()+,/:;<=>?@\|{}`}, want: "+%22%23%25%26%28%29%2B%2C%2F%3A%3B%3C%3D%3E%3F%40%5C%7C%7B%7D"},
+		{name: "testCase03", args: args{s: `Dalvik/2.1.0 (Linux; U; Android 9; Nokia X6 Build/PPR1.180610.011)`},
+			want: "Dalvik%2F2.1.0+%28Linux%3B+U%3B+Android+9%3B+Nokia+X6+Build%2FPPR1.180610.011%29"},
+		{name: "testCase04", args: args{s: "sfadf 这是中文"}, want: "sfadf+%E8%BF%99%E6%98%AF%E4%B8%AD%E6%96%87"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -178,5 +181,38 @@ func BenchmarkRFCEncode(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		RFCEncode(` "#%&()+,/:;<=>?@\|{}`)
+	}
+}
+
+func TestRFCCheck(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{name: "testCase01", args: args{s: "sfadf fadsdfa+Sfd"}, want: false},
+		{name: "testCase02", args: args{s: "sfadffadsdfa+Sfd"}, want: true},
+		{name: "testCase03", args: args{s: "sfadffadsdfa+Sfd中文"}, want: false},
+		{name: "testCase04", args: args{s: `Dalvik/2.1.0 (Linux; U; Android 9; Nokia X6 Build/PPR1.180610.011)`}, want: false},
+		{name: "testCase05", args: args{s: `Dalvik%2F2.1.0+%28Linux%3B+U%3B+Android+9%3B+Nokia+X6+Build%2FPPR1.180610.011%29`}, want: true},
+		{name: "testCase05", args: args{s: ` "#%&()+,/:;<=>?@\|{}`}, want: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := RFCCheck(tt.args.s); got != tt.want {
+				t.Errorf("RFCCheck() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func BenchmarkRFCCheck(b *testing.B) {
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		RFCCheck(`Dalvik%2F2.1.0+%28Linux%3B+U%3B+Android+9%3B+Nokia+X6+Build%2FPPR1.180610.011%29`)
 	}
 }

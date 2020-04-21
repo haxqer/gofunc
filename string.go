@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"math/rand"
 	"net/url"
+	"regexp"
 )
 // generate random string by array of rune.
 func RandStringRunes(n int, strArr []rune) string {
@@ -34,4 +35,11 @@ func Base64DecodeByte(s string) ([]byte, error) {
 // reference: https://tools.ietf.org/html/rfc3986
 func RFCEncode(s string) string {
 	return url.QueryEscape(s)
+}
+
+var RFCRegexp = regexp.MustCompile(`^[0-9a-zA-Z\-_.~+%]*$`)
+// for RFC 3986
+// check RFC character
+func RFCCheck(s string) bool {
+	return RFCRegexp.MatchString(s)
 }
