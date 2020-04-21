@@ -151,3 +151,32 @@ func TestBase64DecodeByte(t *testing.T) {
 		})
 	}
 }
+
+func TestRFCEncode(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{name: "testCase01", args: args{s: "sfadf fadsdfa+Sfd"}, want: "sfadf+fadsdfa%2BSfd"},
+		{name: "testCase02", args: args{s: ` "#%&()+,/:;<=>?@\|{}`}, want: "+%22%23%25%26%28%29%2B%2C%2F%3A%3B%3C%3D%3E%3F%40%5C%7C%7B%7D"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := RFCEncode(tt.args.s); got != tt.want {
+				t.Errorf("EncodeParam() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func BenchmarkRFCEncode(b *testing.B) {
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		RFCEncode(` "#%&()+,/:;<=>?@\|{}`)
+	}
+}

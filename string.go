@@ -3,6 +3,7 @@ package gofunc
 import (
 	"encoding/base64"
 	"math/rand"
+	"net/url"
 )
 // generate random string by array of rune.
 func RandStringRunes(n int, strArr []rune) string {
@@ -27,4 +28,10 @@ func Base64Decode(s string) (string, error) {
 
 func Base64DecodeByte(s string) ([]byte, error) {
 	return base64.StdEncoding.DecodeString(s)
+}
+
+// for RFC 3986
+// reference: https://tools.ietf.org/html/rfc3986
+func RFCEncode(s string) string {
+	return url.QueryEscape(s)
 }
