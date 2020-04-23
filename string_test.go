@@ -125,7 +125,7 @@ func BenchmarkBase64Decode(b *testing.B) {
 
 func TestBase64DecodeByte(t *testing.T) {
 	type args struct {
-		s string
+		b []byte
 	}
 	tests := []struct {
 		name    string
@@ -133,14 +133,14 @@ func TestBase64DecodeByte(t *testing.T) {
 		want    []byte
 		wantErr bool
 	}{
-		{name: "testCase01", args: args{s: "QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODk="},
+		{name: "testCase01", args: args{b: []byte("QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODk=")},
 			want:    []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"),
 			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := Base64DecodeByte(tt.args.s)
+			got, err := Base64DecodeByte(tt.args.b)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Base64DecodeByte() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -214,5 +214,27 @@ func BenchmarkRFCCheck(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		RFCCheck(`Dalvik%2F2.1.0+%28Linux%3B+U%3B+Android+9%3B+Nokia+X6+Build%2FPPR1.180610.011%29`)
+	}
+}
+
+func TestBase64EncodeByte(t *testing.T) {
+	type args struct {
+		b []byte
+	}
+	tests := []struct {
+		name string
+		args args
+		want []byte
+	}{
+		{name: "testCase01", args: args{b: []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")},
+			want:    []byte("QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODk="),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Base64EncodeByte(tt.args.b); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Base64EncodeByte() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }

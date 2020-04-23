@@ -27,8 +27,19 @@ func Base64Decode(s string) (string, error) {
 	return string(bytes), err
 }
 
-func Base64DecodeByte(s string) ([]byte, error) {
-	return base64.StdEncoding.DecodeString(s)
+func Base64EncodeByte(b []byte) []byte {
+	base64Text := make([]byte, base64.StdEncoding.EncodedLen(len(b)))
+	base64.StdEncoding.Encode(base64Text, b)
+	return base64Text
+}
+
+func Base64DecodeByte(b []byte) ([]byte, error) {
+	base64Text := make([]byte, base64.StdEncoding.DecodedLen(len(b)))
+	l, err := base64.StdEncoding.Decode(base64Text, b)
+	if err != nil {
+		return nil, err
+	}
+	return base64Text[:l], nil
 }
 
 // for RFC 3986

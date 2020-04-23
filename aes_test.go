@@ -5,6 +5,7 @@ import (
 	"crypto/cipher"
 	"crypto/rand"
 	"encoding/hex"
+	"fmt"
 	"io"
 	"reflect"
 	"testing"
@@ -95,7 +96,7 @@ func TestAesCBCEncrypt(t *testing.T) {
 		paddingFunc func([]byte, int) []byte
 	}
 
-	key, _ := hex.DecodeString("6368616e676520746869732070617373")
+	key, _ := hex.DecodeString("DDF11F26FC4321EB0C2B83C9D1B2120B64716E4FF28FB3D0E8F4FF73B381A4CC")
 	tests := []struct {
 		name    string
 		args    args
@@ -112,6 +113,26 @@ func TestAesCBCEncrypt(t *testing.T) {
 			want:    []byte("exampleplaintext12"),
 			wantErr: false,
 		},
+		{
+			name: "testCase02",
+			args: args{
+				plainText:   []byte("exampleplainte"),
+				key:         key,
+				paddingFunc: PKCS5Padding,
+			},
+			want:    []byte("exampleplainte"),
+			wantErr: false,
+		},
+		{
+			name: "testCase03",
+			args: args{
+				plainText:   []byte("0123456789012345678901234567890123456789"),
+				key:         key,
+				paddingFunc: PKCS5Padding,
+			},
+			want:    []byte("0123456789012345678901234567890123456789"),
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -120,6 +141,7 @@ func TestAesCBCEncrypt(t *testing.T) {
 				t.Errorf("AesCBCEncrypt() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
+			fmt.Printf("%X \n", got)
 
 			want2, err := AesCBCDecrypt(got, key, PKCS5UnPadding)
 			if err != nil {
