@@ -10,6 +10,30 @@ import (
 	"io"
 )
 
+func GenRandomIV() ([]byte, error) {
+	iv,err := GenRandomBytes(16)
+	if err != nil {
+		return nil, err
+	}
+	return iv, nil
+}
+
+func GenRandomEK() ([]byte, error) {
+	iv,err := GenRandomBytes(32)
+	if err != nil {
+		return nil, err
+	}
+	return iv, nil
+}
+
+func GenRandomBytes(length int) ([]byte, error) {
+	iv := make([]byte, length)
+	if _, err := io.ReadFull(rand.Reader, iv); err != nil {
+		return nil, err
+	}
+	return iv, nil
+}
+
 func Aes128CBCEncryptBase64Encode(key []byte, iv []byte, src []byte) ([]byte, error) {
 	result, err := Aes128CBCEncrypt(src, key, iv)
 	if err != nil {

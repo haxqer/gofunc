@@ -10,6 +10,84 @@ import (
 	"testing"
 )
 
+func TestGenRandomIV(t *testing.T) {
+	tests := []struct {
+		name    string
+		want    []byte
+		wantErr bool
+	}{
+		{name:"testCase01", want: nil, wantErr: false},
+		{name:"testCase02", want: nil, wantErr: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := GenRandomIV()
+			if (err != nil) != tt.wantErr {
+				t.Errorf("GenRandomIV() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if len(got) != 16 {
+				t.Errorf("GenRandomIV() error = length is not 32")
+				return
+			}
+			//fmt.Printf("%X \n", got)
+		})
+	}
+}
+
+func BenchmarkGenRandomIV(b *testing.B) {
+	//b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		got, err := GenRandomIV()
+		if err != nil {
+			b.Errorf("GenRandomIV() err %+v = got = %s", err, got)
+		}
+		if len(got) != 16 {
+			b.Errorf("GenRandomIV() error = length is not 32")
+			return
+		}
+	}
+}
+
+func TestGenRandomEK(t *testing.T) {
+	tests := []struct {
+		name    string
+		want    []byte
+		wantErr bool
+	}{
+		{name:"testCase01", want: nil, wantErr: false},
+		{name:"testCase02", want: nil, wantErr: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := GenRandomEK()
+			if (err != nil) != tt.wantErr {
+				t.Errorf("GenRandomEK() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if len(got) != 32 {
+				t.Errorf("GenRandomEK() error = length is not 32")
+				return
+			}
+			//fmt.Printf("%X \n", got)
+		})
+	}
+}
+
+func BenchmarkGenRandomEK(b *testing.B) {
+	//b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		got, err := GenRandomEK()
+		if err != nil {
+			b.Errorf("GenRandomEK() err %+v = got = %s", err, got)
+		}
+		if len(got) != 32 {
+			b.Errorf("GenRandomEK() error = length is not 32")
+			return
+		}
+	}
+}
+
 func TestAesCBCEncrypt(t *testing.T) {
 	type args struct {
 		plainText   []byte
