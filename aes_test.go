@@ -133,6 +133,16 @@ func TestAesCBCEncrypt(t *testing.T) {
 			want:    []byte("0123456789012345678901234567890123456789"),
 			wantErr: false,
 		},
+		{
+			name: "testCase03",
+			args: args{
+				plainText:   []byte("123"),
+				key:         key,
+				paddingFunc: PKCS5Padding,
+			},
+			want:    []byte("123"),
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
