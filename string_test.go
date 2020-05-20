@@ -238,3 +238,96 @@ func TestBase64EncodeByte(t *testing.T) {
 		})
 	}
 }
+
+func TestHexEncode(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{name: "testCase01", args: args{s: "asdfasfsf13"}, want: "6173646661736673663133"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := HexEncode(tt.args.s); got != tt.want {
+				t.Errorf("HexEncode() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestHexDecode(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    []byte
+		wantErr bool
+	}{
+		{name: "testCase01", args: args{s: "6173646661736673663133"}, want: []byte("asdfasfsf13"), wantErr: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := HexDecode(tt.args.s)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("HexDecode() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("HexDecode() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestHexEncodeByte(t *testing.T) {
+	type args struct {
+		b []byte
+	}
+	tests := []struct {
+		name string
+		args args
+		want []byte
+	}{
+		{name: "testCase01", args: args{b: []byte("asdfasfsf13")}, want: []byte("6173646661736673663133")},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := HexEncodeByte(tt.args.b); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("HexEncodeByte() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestHexDecodeByte(t *testing.T) {
+	type args struct {
+		b []byte
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    []byte
+		wantErr bool
+	}{
+		{name: "testCase01", args: args{b: []byte("6173646661736673663133")}, want: []byte("asdfasfsf13"), wantErr: false},
+		{name: "testCase01", args: args{b: []byte("asdfzxcvdf6173646661736673663133")}, want: nil, wantErr: true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := HexDecodeByte(tt.args.b)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("HexDecodeByte() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("HexDecodeByte() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

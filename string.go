@@ -2,6 +2,7 @@ package gofunc
 
 import (
 	"encoding/base64"
+	"encoding/hex"
 	"math/rand"
 	"net/url"
 	"regexp"
@@ -54,3 +55,25 @@ var RFCRegexp = regexp.MustCompile(`^[0-9a-zA-Z\-_.~+%]*$`)
 func RFCCheck(s string) bool {
 	return RFCRegexp.MatchString(s)
 }
+
+func HexEncode(s string) string {
+	return hex.EncodeToString([]byte(s))
+}
+
+func HexEncodeByte(b []byte) []byte {
+	dst := make([]byte, hex.EncodedLen(len(b)))
+	hex.Encode(dst, b)
+	return dst
+}
+
+func HexDecode(s string) ([]byte, error) {
+	return hex.DecodeString(s)
+}
+
+func HexDecodeByte(b []byte) ([]byte, error) {
+	n, err := hex.Decode(b, b)
+	return b[:n], err
+}
+
+
+
