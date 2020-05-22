@@ -5,7 +5,25 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"time"
 )
+
+func FetchWithTimeout(timeout time.Duration,url string) ([]byte, error) {
+	client := http.Client{
+		Timeout: timeout,
+	}
+	resp, err := client.Get(strings.TrimSpace(url))
+	if err != nil {
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("wrong status code: %d", resp.StatusCode)
+	}
+
+	return ioutil.ReadAll(resp.Body)
+}
 
 func Fetch(url string) ([]byte, error) {
 	resp, err := http.Get(strings.TrimSpace(url))
