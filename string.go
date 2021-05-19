@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"net/url"
 	"regexp"
+	"strconv"
 )
 // generate random string by array of rune.
 func RandStringRunes(n int, strArr []rune) string {
@@ -73,6 +74,10 @@ func HexDecode(s string) ([]byte, error) {
 func HexDecodeByte(b []byte) ([]byte, error) {
 	n, err := hex.Decode(b, b)
 	return b[:n], err
+}
+
+func Int64ToString(i int64) string {
+	return strconv.FormatInt(i, 10)
 }
 
 

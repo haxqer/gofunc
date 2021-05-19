@@ -331,3 +331,23 @@ func TestHexDecodeByte(t *testing.T) {
 		})
 	}
 }
+
+func TestInt64ToString(t *testing.T) {
+	type args struct {
+		i int64
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{name: "testCase-01", args: args{i: 1234567890123111}, want: "1234567890123111"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Int64ToString(tt.args.i); got != tt.want {
+				t.Errorf("Int64ToString() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
