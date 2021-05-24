@@ -1,6 +1,7 @@
 package gofunc
 
 import (
+	"crypto"
 	"crypto/sha1"
 	"encoding/hex"
 	"strings"
@@ -18,4 +19,9 @@ func Sha1Upper(s string) string {
 	return strings.ToUpper(hex.EncodeToString(h.Sum(nil)))
 }
 
+func Sha256Lower(s string) string  {
+	h := crypto.SHA256.New()
+	h.Write([]byte(s))
+	return hex.EncodeToString(h.Sum(nil))
+}
 
