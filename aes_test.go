@@ -446,3 +446,82 @@ func TestAes128CBCDecryptBase64Decode(t *testing.T) {
 		})
 	}
 }
+
+func TestAesGCMNoPaddingDecryptBase64Decode(t *testing.T) {
+	type args struct {
+		cipherText []byte
+		key        []byte
+	}
+	key1, _ := hex.DecodeString(`2836e95fcd10e04b0069bb1ee659955b`)
+	tests := []struct {
+		name    string
+		args    args
+		want    []byte
+		wantErr bool
+	}{
+		{
+			name: "testCase-01",
+			args: args{
+				cipherText: []byte(`CqT/33f3jyoiYqT8MtxEFk3x2rlfhmgzhxpHqWosSj4d3hq2EbrtVyx2aLj565ZQNTcPrcDipnvpq/D/vQDaLKW70O83Q42zvR0//OfnYLcIjTPMnqa+SOhsjQrSdu66ySSORCAo`),
+				key:        key1,
+			},
+			want: []byte(`{"ai":"test-accountId","name":"用户姓名","idNum":"371321199012310912"}`),
+			wantErr: false,
+		},
+		{
+			name: "testCase-02",
+			args: args{
+				cipherText: []byte(`KC6SvnvpPMaRudCk10Tl/WWC0Ym+d768g+mRQdJ6wU3P2HSU0fmOoz6rm4VB9uvKhv/IH28EESesVkq1GOz1qzQrvRwSQe59lXayv5B8MJPxPR21H2F4lzQX7e7PP8TUCGV4vjhs`),
+				key:        key1,
+			},
+			want: []byte(`{"ai":"test-accountId","name":"用户姓名","idNum":"371321199012310912"}`),
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := AesGCMNoPaddingDecryptBase64Decode(tt.args.cipherText, tt.args.key)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("AesGCMNoPaddingDecrypt() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("AesGCMNoPaddingDecrypt() got = %s, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestAesGCMNoPaddingEncryptBase64Encode(t *testing.T) {
+	type args struct {
+		origData []byte
+		key      []byte
+	}
+	key1, _ := hex.DecodeString(`2836e95fcd10e04b0069bb1ee659955b`)
+	tests := []struct {
+		name    string
+		args    args
+		want    []byte
+		wantErr bool
+	}{
+		{
+			name: "testCase-01",
+			args: args{
+				origData: []byte(`{"ai":"test-accountId","name":"用户姓名","idNum":"371321199012310912"}`),
+				key:      key1,
+			},
+			want: nil,
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := AesGCMNoPaddingEncryptBase64Encode(tt.args.origData, tt.args.key)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("AesGCMNoPaddingEncryptBase64Encode() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			fmt.Printf("%s", got)
+		})
+	}
+}
