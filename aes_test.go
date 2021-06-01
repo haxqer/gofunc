@@ -452,7 +452,8 @@ func TestAesGCMNoPaddingDecryptBase64Decode(t *testing.T) {
 		cipherText []byte
 		key        []byte
 	}
-	key1, _ := hex.DecodeString(`2836e95fcd10e04b0069bb1ee659955b`)
+	key1, _ := hex.DecodeString(`889645f82002791df852847461de9824`)
+	key2 := []byte(`1234567890123456`)
 	tests := []struct {
 		name    string
 		args    args
@@ -471,10 +472,19 @@ func TestAesGCMNoPaddingDecryptBase64Decode(t *testing.T) {
 		{
 			name: "testCase-02",
 			args: args{
-				cipherText: []byte(`KC6SvnvpPMaRudCk10Tl/WWC0Ym+d768g+mRQdJ6wU3P2HSU0fmOoz6rm4VB9uvKhv/IH28EESesVkq1GOz1qzQrvRwSQe59lXayv5B8MJPxPR21H2F4lzQX7e7PP8TUCGV4vjhs`),
+				cipherText: []byte(`DrtezM7/uXDSZb+IErPNdWCx/XcFbZt/ety4XASU/01rU4Lagzj0ZGLQd8sLVDxE6axtINauypc02XdZFC/aoXNiHvK5dIozXAlz3PRq6Yg+EnsHt+JIfnJWrnr177O75euMIelJncvbU34I1dkB8Y0O2gRg`),
 				key:        key1,
 			},
 			want: []byte(`{"ai":"test-accountId","name":"用户姓名","idNum":"371321199012310912"}`),
+			wantErr: false,
+		},
+		{
+			name: "testCase-03",
+			args: args{
+				cipherText: []byte(`BAYHAAoJBQMCCwEImU09fpkzNl8JgrjUGZEG50qpxTfJIOU=`),
+				key:        key2,
+			},
+			want: []byte(`haxqer1`),
 			wantErr: false,
 		},
 	}
@@ -508,6 +518,15 @@ func TestAesGCMNoPaddingEncryptBase64Encode(t *testing.T) {
 			name: "testCase-01",
 			args: args{
 				origData: []byte(`{"ai":"test-accountId","name":"用户姓名","idNum":"371321199012310912"}`),
+				key:      key1,
+			},
+			want: nil,
+			wantErr: false,
+		},
+		{
+			name: "testCase-02",
+			args: args{
+				origData: []byte(`haxqer1`),
 				key:      key1,
 			},
 			want: nil,

@@ -156,6 +156,25 @@ func AesGCMNoPaddingEncryptBase64Encode(origData, key []byte) ([]byte, error) {
 	return Base64EncodeByte(cipherText), nil
 }
 
+func AesGCMEncryptBase64Encode(origData, key []byte, paddingFunc func([]byte, int) []byte) ([]byte, error) {
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return nil, err
+	}
+	nonce := make([]byte, 12)
+	if _, err := io.ReadFull(rand.Reader, nonce); err != nil {
+		return nil, err
+	}
+	aesGCM, err := cipher.NewGCM(block)
+	if err != nil {
+		return nil, err
+	}
+	origData = paddingFunc(origData, 16)
+	cipherText := aesGCM.Seal(nil, nonce, origData, nil)
+	cipherText = append(nonce, cipherText...)
+	return Base64EncodeByte(cipherText), nil
+}
+
 func AesGCMNoPaddingDecryptBase64Decode(cipherText []byte, key []byte) ([]byte, error) {
 	block, err := aes.NewCipher(key)
 	if err != nil {

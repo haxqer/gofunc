@@ -43,7 +43,7 @@ func TestDecryptString(t *testing.T) {
 		{
 			name: "testCase-04",
 			args: args{
-				str: "b/sq0Mou7eRfcY0FDCqWbqScAtGMBUeZ068TMX7tVO48lR77JxyGDc6MdigSdO7aiRbGPiHtMMs=",
+				str: "uQFZEVWAAz/9akuVyMlcHOJuHmndaIHywA/A89mFHBiiyIz+jhSInw==",
 				key: "sdb123",
 			},
 			want: `{"code":400,"msg":"请求参数错误","data":"加解密错误"}`,
@@ -52,7 +52,7 @@ func TestDecryptString(t *testing.T) {
 		{
 			name: "testCase-05",
 			args: args{
-				str: "KgAhM9eZ9SVjY9qhLhTzttqbePCdfgaFnTKbEROZsvof3AoIVGfKL/Xt/AeU59Ajpwc2t9s2SJOw4DyKw1rqLCD3bQ9DDBDt3668Xm4hwm6S1lVooYzrtXf5/m4UdXZ7bjU+QMqcSoIicB90bPdlIRDcCkSmn05ody78+njd9CPRLDeUjzMWnXWIiof3dkYaCPfSX26Y5utvNjKXnRwer/Ve5m4WMfe5kIx5raKYkhtg3P/2yosQyFpuiMyDf6rjCwwWYpF8X+JIAWsvAmXBwt3HKiHh3fA7jVpvuVRABq/AHiClc0nNBozmb0Cu+RcP68/PSfvPr+zmGeOfawook6/kR42y7m2WsfulEyrGXqdcfX+0M35+T+oHWwZTeWkXWJgNvd9wOIgkDQcPnQ//8vlBqrBEBEi404f8rFLDsaIqJGqobihJbLSsboIZh9R1gZMFmJ0GWu/vCWVaKaRZjDUR0Q2zXRZgOnKgf0CkqMXy1X+WV8FDHlIJObTkp5u2PI8P6fEYUiBYwrOsZkkx03iqdGcKvHcPOWeddzuHwEtK/Kr5wYpWOUcpGAbHVIhVX2pM95mOKhofzERNLuOJDy7rtsGg4JU2bSNkDBKfS29IoIRNW1i/d0h0pPjpYgUAgcYoyDh8KbQwBG2XjtjTUXwuyevjtUrK+nJ5GrSsbsyHw4RVDdOv7ms+CFfL4iFktR7EbPO2WNR6NfgIKja2bBmd2PugGCoIvBoaOUgaSCmSEtkeuFPZmLj8E3SA6bkDoCvIwLvemjoKU2b9v+3vAhaImFxkRF2awO6TsqZj5Rih849AzTa0ZVT9wu11B1es20n61q9nhU7In3E3cLhRSZeOnxlUJnNb3HfH2RD0jyTsEeDWu7ud3QjCamxQ2py3N6Lm0VUAkQsV5ColP3sFmWzI50DOJ20ZUSyOsmsT4t9GUrpKhKznu7+JqmpqpGr0XIBMdUlIcCmC2LsHuXn8IdnoM5uIqYwkTA8iV60g1rlCYJcY5j4OXpqLNU8yVpGx1s5Cr+Wwy94LeHTooGar6cno1YeALdLkZ591PmtQpG9X2xW/oBzjdG+17HUiIL/rW8tflk8FRNaZGJU5AO4qH+9xnPkhByyMuCmV+o31tUaKfioges5DOD3gThEHA1vkF7UNzKcSzC0W44D8Gy45kznAoEXu7rW0n/K0t64G6DbdaoSA3UPakVus+DLeK67hq1TqmBjaaCyj5CCLzlLZBYh7UlNlxPgYdg9m4k5Ut+gcknNEqNeBhOy7zv2Zg2DshzWAe5j5TKh6C+cuwksv94qeGxKoU37iEquLOzpAB7fSnnnNOtXvhPrIjNrwRiZSXv4tkgnZiJmW+jEevxA/fw72DZFioRTm01eZzdlIqTsOYqn0GlHqDeZ31J4aRDEHP491y13PxTuwCE3JVTVo5bajfCZ9JxizLdqFzL9SPlNVpW9kzQepGn/4OyXOvZFCDoRMnIoYByI=",
+				str: "gUa3HdM4J9mo4DI/FUKlH/EofoWUssZenrB2HOhM2OtmDAOmS+Dc79bivTt++WKNUuFLIksbV6LdSMyy/VztzStP+ikjkqu6z2eOgsMd5K8=",
 				key: "sdb123",
 			},
 			want: ``,
@@ -110,7 +110,7 @@ func TestEncryptString(t *testing.T) {
 		{
 			name: "testCase-04",
 			args: args{
-				str: `{"order_id":"1187218229794185216"}`,
+				str: `{"gss_app_id":"6002"}`,
 				key: "sdb123",
 			},
 			want: `XBXfrxu+rcKs7Bd4MRSNAsmAgYGzNPkKn4mUKLwY+bPhZX+WdWbqIg==`,
