@@ -351,3 +351,76 @@ func TestInt64ToString(t *testing.T) {
 		})
 	}
 }
+
+
+func TestStringToInt64(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    int64
+		wantErr bool
+	}{
+		{name: "testCase-01", args: args{s: "99999999999"}, want: 99999999999, wantErr: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := StringToInt64(tt.args.s)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("StringToInt64() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got != tt.want {
+				t.Errorf("StringToInt64() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestIntToString(t *testing.T) {
+	type args struct {
+		i int
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{name: "testCase-01", args: args{i: 999999}, want: "999999"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := IntToString(tt.args.i); got != tt.want {
+				t.Errorf("IntToString() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestStringToInt(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    int
+		wantErr bool
+	}{
+		{name: "testCase-01", args: args{s: "99999999"}, want: 99999999, wantErr: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := StringToInt(tt.args.s)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("StringToInt() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got != tt.want {
+				t.Errorf("StringToInt() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

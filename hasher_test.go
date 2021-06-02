@@ -25,7 +25,7 @@ func TestMd5Upper(t *testing.T) {
 		{name: "testCase12", args: args{s: `{"game_version": "123"}sdb1!2@3#`}, want: "B6B5BA2AA9A58488E2425FBAFD37F488"},
 		{name: "testCase13", args: args{s: `{"pay_method":"WECHAT_H5","order_amount":2,"game_product_name":"测试游戏商品名称","game_product_amount":1}sdb1!2@3#`}, want: "3C3F604C9ACDD686FA860ED5CF317DE3"},
 		{name: "testCase14", args: args{s: `{"gss_app_id":"6002"}sdb1!2@3#`}, want: "58699F25CC4B87939305FA53F52F154D"},
-		{name: "testCase14", args: args{s: `{"pay_method":"ALIPAY_H5","order_amount":"2","game_product_name":"测试游戏商品名称","game_product_amount":"1"}sdb1!2@3#`}, want: "2DE4C13EDB58035857A9B153BB24A3F9"},
+		{name: "testCase14", args: args{s: `51f85ee0687a3f21{"a":1}`}, want: "2DE4C13EDB58035857A9B153BB24A3F9"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

@@ -43,8 +43,8 @@ func TestDecryptString(t *testing.T) {
 		{
 			name: "testCase-04",
 			args: args{
-				str: "uQFZEVWAAz/9akuVyMlcHOJuHmndaIHywA/A89mFHBiiyIz+jhSInw==",
-				key: "sdb123",
+				str: "5uANLaE7PEGMZigg3BJ+Ts983og7WiRURN5mU9MPQEn++9o7CEGpEOw/sfztXS/zJHW2yNQvHQ/yN/MX",
+				key: "1234567890adfsjd",
 			},
 			want: `{"code":400,"msg":"请求参数错误","data":"加解密错误"}`,
 			wantErr: false,
@@ -52,8 +52,17 @@ func TestDecryptString(t *testing.T) {
 		{
 			name: "testCase-05",
 			args: args{
-				str: "gUa3HdM4J9mo4DI/FUKlH/EofoWUssZenrB2HOhM2OtmDAOmS+Dc79bivTt++WKNUuFLIksbV6LdSMyy/VztzStP+ikjkqu6z2eOgsMd5K8=",
-				key: "sdb123",
+				str: "GzxYh83ueSR30vgslDi0ir1DpNEG0yQ4",
+				key: "1234567890adfsj1",
+			},
+			want: `{"code":400,"msg":"请求参数错误","data":"加解密错误"}`,
+			wantErr: false,
+		},
+		{
+			name: "testCase-06",
+			args: args{
+				str: "RGBJim9LCu+B+AhU3sMhnRHOiqAOt2DmybOT5F/4aM39irjRJ/ECerjjlcjqHM7C9tiSGIP900o7FIby47jwdD3kYQL0mVqmqunYtq55XGvPN7TMdKVjwtahVtSKb4acaX2uxSIsOuAQ5xQp7ox3CiArsm3G2+o9Wu+NME//qnHdkG5jBYqXVKOAqLN85FUF+/BfyLYkdR8fAn8X",
+				key: "1234567890adfsjd",
 			},
 			want: ``,
 			wantErr: false,
@@ -111,24 +120,20 @@ func TestEncryptString(t *testing.T) {
 			name: "testCase-04",
 			args: args{
 				str: `{"gss_app_id":"6002"}`,
-				key: "sdb123",
+				key: "51f85ee0687a3f21",
 			},
 			want: `XBXfrxu+rcKs7Bd4MRSNAsmAgYGzNPkKn4mUKLwY+bPhZX+WdWbqIg==`,
 		},
 		{
 			name: "testCase-05",
 			args: args{
-				str: `{"pay_method":"ALIPAY_H5","order_amount":"2","game_product_name":"测试游戏商品名称","game_product_amount":"1"}`,
-				key: "sdb123",
+				str: `{"auth_platform":"APPLE","apple_user_id":"001876.345341e39ae64c6a92ee87dbbb2ab1c4.0248","apple_identity_token":"eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLnlvdWppdS5xaWNhaW1hamlhbmciLCJleHAiOjE2MjE2NTE3MzEsImlhdCI6MTYyMTU2NTMzMSwic3ViIjoiMDAxODc2LjM0NTM0MWUzOWFlNjRjNmE5MmVlODdkYmJiMmFiMWM0LjAyNDgiLCJjX2hhc2giOiJhVU5lTm01T2JJeXI2bnRwM3IwdWlnIiwiZW1haWwiOiI3OTMzMzI4MTZAcXEuY29tIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjIxNTY1MzMxLCJ0cmFuc2Zlcl9zdWIiOiIwMDE4NzYucmRjOTU1ZTNkY2E3ZjRjNjU4ZmJhYmIwMWE4ZDNhMjFhIiwibm9uY2Vfc3VwcG9ydGVkIjp0cnVlfQ.cjCY_YmhLGf0wL8pTZDlx01oarj2SV8eUUrs1Moww8kfp0eWmwbFRC5s4hEHBfYFecy4lELW1bhfe9YjGM0GkwO96n4AbhSSxvbo8mQLFWCC-YRRNZZ2UlboIpZR1jTBlDYm9Yx-idUWCVTBgFacaaEWWHqV3Tgb3zjPfB6uMvq2xTU3vzD3HUYwmpB8m-1uoTPkROHK4gvutIZg85SVr1ZQ9WL7yEBt0InwzVrtVTx44BE8O2W-dJA7CAb6GJzsLIc3uipjnp1K7w2gAos_gUl5F0HGJafwyGnuYfYsAmZ8u4WK4LQsTyD_smONUiHYF5AAYPVPSaq4iUzJt98DuQ","ts":1111}`,
+				key: "1234567890adfsjd",
 			},
 			want: `DmuggcRtB4y1z2YKstJwdpo4NS/ro+yDwFhfQBsNK85KLY8v3nUgGT0+t1espcqTM76skF/G5y9gyomcj7iGpx4od0JLCWIOBjhLtQJoDsiFRFPabLWs0isSCM4VoAmN/iwjdIe6ATOjlj2Q0XZVla1Z/btoTSRs8scqLQ==`,
 		},
 	}
 	for _, tt := range tests {
-		var a int
-		a = 1
-		println(a/100.0)
-
 		t.Run(tt.name, func(t *testing.T) {
 			if got := EncryptString(tt.args.str, tt.args.key); got != tt.want {
 				t.Errorf("EncryptString() = %v, want %v", got, tt.want)

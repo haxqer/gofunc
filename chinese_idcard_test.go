@@ -18,6 +18,8 @@ func TestChineseIdCardVerify(t *testing.T) {
 		{name: "testCase-05", args: args{idCard: "350201199308194277"}, want: true},
 		{name: "testCase-06", args: args{idCard: "150201199308194277"}, want: false},
 		{name: "testCase-07", args: args{idCard: "350205198711076036"}, want: true},
+		{name: "testCase-08", args: args{idCard: "513029199006070453"}, want: true},
+		{name: "testCase-08", args: args{idCard: "513029201006070453"}, want: true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
