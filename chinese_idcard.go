@@ -12,7 +12,8 @@ var (
 	factor         = []int32{7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2}
 	parity         = []byte{'1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'}
 	validIdCardReg = regexp.MustCompile(`^[1-9]\d{5}(19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$`)
-	chineseNameRegexp  = regexp.MustCompile("^[\u4e00-\u9fa5]{2,6}$")
+	// http://www.gov.cn/xinwen/2016-05/09/content_5071481.htm
+	chineseNameRegexp  = regexp.MustCompile("^[\u4e00-\u9fa5\u00b7]{2,25}$")
 	chinaRegionCode = map[string]string{
 		"11" : "北京",
 		"12" : "天津",
@@ -91,6 +92,7 @@ func ParseChineIdCardAge(idCard string) (int, error) {
 }
 
 // ChineseNameVerify 中文名称校验
+// refer:  http://www.gov.cn/xinwen/2016-05/09/content_5071481.htm
 // todo 百家姓
 func ChineseNameVerify(name string) bool {
 	return chineseNameRegexp.MatchString(name)

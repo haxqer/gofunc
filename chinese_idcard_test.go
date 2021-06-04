@@ -46,6 +46,11 @@ func TestChineseNameVerify(t *testing.T) {
 		{name: "testCase-05", args: args{name: "窦"}, want: false},
 		{name: "testCase-06", args: args{name: "臧誉胜"}, want: true},
 		{name: "testCase-07", args: args{name: "呵呵呵"}, want: true},
+		{name: "testCase-08", args: args{name: "卡拉潘克·晓"}, want: true},
+		{name: "testCase-09", args: args{name: "库大库路马拉可林不拉夫斯基"}, want: true},
+		{name: "testCase-10", args: args{name: "胡柏·布里恩·沃夫斯里积士丁可辛贝格多夫"}, want: true},
+		{name: "testCase-11", args: args{name: "叶利钦·叶尔波力"}, want: true},
+		{name: "testCase-12", args: args{name: "这是个什么鬼名字·我也不知道"}, want: true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

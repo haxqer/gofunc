@@ -52,7 +52,7 @@ func TestDecryptString(t *testing.T) {
 		{
 			name: "testCase-05",
 			args: args{
-				str: "GzxYh83ueSR30vgslDi0ir1DpNEG0yQ4",
+				str: "XXfPte0LqbUDr/FcYSCxhSPpF6SocPH1NZqAGm9CTeXVjGgqgVYdb9EfD0CEhfvQeg6yXhvFQNxuSqdFyqNYX9rMr+S85O3nppokKQ==",
 				key: "1234567890adfsj1",
 			},
 			want: `{"code":400,"msg":"请求参数错误","data":"加解密错误"}`,
@@ -61,7 +61,7 @@ func TestDecryptString(t *testing.T) {
 		{
 			name: "testCase-06",
 			args: args{
-				str: "RGBJim9LCu+B+AhU3sMhnRHOiqAOt2DmybOT5F/4aM39irjRJ/ECerjjlcjqHM7C9tiSGIP900o7FIby47jwdD3kYQL0mVqmqunYtq55XGvPN7TMdKVjwtahVtSKb4acaX2uxSIsOuAQ5xQp7ox3CiArsm3G2+o9Wu+NME//qnHdkG5jBYqXVKOAqLN85FUF+/BfyLYkdR8fAn8X",
+				str: "xETOidnksnb6ch6k00qvAj1SAoHe2Q6Qu9VKTPpb4Ioi0Old5b9R0pDIAZqrC+TBxRbC00qvo06N/cNdkqwL2rogAhRQX80KcsVIbng0W6+4D8zrw9aT4dy86yBfE5Afb7ygQxA0aNxYWC4WgyzRPQ==",
 				key: "1234567890adfsjd",
 			},
 			want: ``,
@@ -128,6 +128,14 @@ func TestEncryptString(t *testing.T) {
 			name: "testCase-05",
 			args: args{
 				str: `{"auth_platform":"APPLE","apple_user_id":"001876.345341e39ae64c6a92ee87dbbb2ab1c4.0248","apple_identity_token":"eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLnlvdWppdS5xaWNhaW1hamlhbmciLCJleHAiOjE2MjE2NTE3MzEsImlhdCI6MTYyMTU2NTMzMSwic3ViIjoiMDAxODc2LjM0NTM0MWUzOWFlNjRjNmE5MmVlODdkYmJiMmFiMWM0LjAyNDgiLCJjX2hhc2giOiJhVU5lTm01T2JJeXI2bnRwM3IwdWlnIiwiZW1haWwiOiI3OTMzMzI4MTZAcXEuY29tIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjIxNTY1MzMxLCJ0cmFuc2Zlcl9zdWIiOiIwMDE4NzYucmRjOTU1ZTNkY2E3ZjRjNjU4ZmJhYmIwMWE4ZDNhMjFhIiwibm9uY2Vfc3VwcG9ydGVkIjp0cnVlfQ.cjCY_YmhLGf0wL8pTZDlx01oarj2SV8eUUrs1Moww8kfp0eWmwbFRC5s4hEHBfYFecy4lELW1bhfe9YjGM0GkwO96n4AbhSSxvbo8mQLFWCC-YRRNZZ2UlboIpZR1jTBlDYm9Yx-idUWCVTBgFacaaEWWHqV3Tgb3zjPfB6uMvq2xTU3vzD3HUYwmpB8m-1uoTPkROHK4gvutIZg85SVr1ZQ9WL7yEBt0InwzVrtVTx44BE8O2W-dJA7CAb6GJzsLIc3uipjnp1K7w2gAos_gUl5F0HGJafwyGnuYfYsAmZ8u4WK4LQsTyD_smONUiHYF5AAYPVPSaq4iUzJt98DuQ","ts":1111}`,
+				key: "1234567890adfsjd",
+			},
+			want: `DmuggcRtB4y1z2YKstJwdpo4NS/ro+yDwFhfQBsNK85KLY8v3nUgGT0+t1espcqTM76skF/G5y9gyomcj7iGpx4od0JLCWIOBjhLtQJoDsiFRFPabLWs0isSCM4VoAmN/iwjdIe6ATOjlj2Q0XZVla1Z/btoTSRs8scqLQ==`,
+		},
+		{
+			name: "testCase-05",
+			args: args{
+				str: `{"pay_method":"APPLE_NATIVE","order_amount":"1","game_product_name":"test","game_product_amount":"1"}`,
 				key: "1234567890adfsjd",
 			},
 			want: `DmuggcRtB4y1z2YKstJwdpo4NS/ro+yDwFhfQBsNK85KLY8v3nUgGT0+t1espcqTM76skF/G5y9gyomcj7iGpx4od0JLCWIOBjhLtQJoDsiFRFPabLWs0isSCM4VoAmN/iwjdIe6ATOjlj2Q0XZVla1Z/btoTSRs8scqLQ==`,
