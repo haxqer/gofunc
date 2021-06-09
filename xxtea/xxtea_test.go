@@ -61,10 +61,19 @@ func TestDecryptString(t *testing.T) {
 		{
 			name: "testCase-06",
 			args: args{
-				str: "xETOidnksnb6ch6k00qvAj1SAoHe2Q6Qu9VKTPpb4Ioi0Old5b9R0pDIAZqrC+TBxRbC00qvo06N/cNdkqwL2rogAhRQX80KcsVIbng0W6+4D8zrw9aT4dy86yBfE5Afb7ygQxA0aNxYWC4WgyzRPQ==",
+				str: "TDm7Y4h5bdLRHO4BfBEBRkCV9yOYbZYOjqNiSTzjrTWKFzCeRIAdk89/Hgj8vQ/YMmwbd1CuiYHTjHOv632oEaUClbwSLLSZu2r+osKlstNiajFoLUaKyA8CCmMlO5e7Ed38Fz6Lq8tso3fPmABhtFhwJMC8lpBW4V2JkVq6FsLL7gEOJV6PyZtwR13X9THUbcN/uzmaUaJgHgtzt9MlCw==",
 				key: "1234567890adfsjd",
 			},
 			want: ``,
+			wantErr: false,
+		},
+		{
+			name: "testCase-07",
+			args: args{
+				str: "iEE6jUhG/qaFmkNn79HU+EySE0iApPz8jIC/QDQy6vUwStYeUrAImi6Bxdn4yH0naUsFbVRYK2Xh+abx0+E4o5rrkVJX6jSx8KIn6syLldKDLQ0RB05iy8R2R++K23WDEr2DJr+WzbHDFL1MCAP98HTN0tjrxjL1H/aO+Q==",
+				key: "1234567890adfsj2",
+			},
+			want: `{"code":41110,"msg":"第三方登陆接口参数验证错误","data":null}`,
 			wantErr: false,
 		},
 	}
@@ -101,14 +110,6 @@ func TestEncryptString(t *testing.T) {
 			want: ``,
 		},
 		{
-			name: "testCase-02",
-			args: args{
-				str: `{"game_version": "123"}`,
-				key: "sdb123",
-			},
-			want: ``,
-		},
-		{
 			name: "testCase-03",
 			args: args{
 				str: `{"pay_method":"WECHAT_H5","order_amount":2,"game_product_name":"测试游戏商品名称","game_product_amount":1}`,
@@ -133,12 +134,28 @@ func TestEncryptString(t *testing.T) {
 			want: `DmuggcRtB4y1z2YKstJwdpo4NS/ro+yDwFhfQBsNK85KLY8v3nUgGT0+t1espcqTM76skF/G5y9gyomcj7iGpx4od0JLCWIOBjhLtQJoDsiFRFPabLWs0isSCM4VoAmN/iwjdIe6ATOjlj2Q0XZVla1Z/btoTSRs8scqLQ==`,
 		},
 		{
-			name: "testCase-05",
+			name: "testCase-06",
 			args: args{
 				str: `{"pay_method":"APPLE_NATIVE","order_amount":"1","game_product_name":"test","game_product_amount":"1"}`,
 				key: "1234567890adfsjd",
 			},
 			want: `DmuggcRtB4y1z2YKstJwdpo4NS/ro+yDwFhfQBsNK85KLY8v3nUgGT0+t1espcqTM76skF/G5y9gyomcj7iGpx4od0JLCWIOBjhLtQJoDsiFRFPabLWs0isSCM4VoAmN/iwjdIe6ATOjlj2Q0XZVla1Z/btoTSRs8scqLQ==`,
+		},
+		{
+			name: "testCase-07",
+			args: args{
+				str: `{"auth_platform":"OPPO","oauth_code":"TICKET_JAGC/wBO+Cpn+XN/VAHmH3CnLyZj2bpk8wp5xp444iQZkE4kyL4ZGS1TsFl2grIDSHMNW+VJjcJ6rRbVtFHleH6GoiYWwmFJniMel6/F0s2=","sso_id":"7123683071"}`,
+				key: "1234567890adfsj2",
+			},
+			want: `bLg/ehk1uL3Ua/4tJoU/9MsS8yplbt6chP3sd9ixhJK1o+LJymUXfbTfUKPZLw8OceiuZLVmXRTzaFXFN9I/meTa7EKdU4xhl71qZL1NWW9HAbJthFqSoewJesVikY/wYDJwd0/eRKI3icZ2c7exZJLX0jvWTrdlMym55sgxmjL/sAdyoHZ7QQMNyq5+hqPkXVlHspdvOEeJWCF8Hi4/9cXEiPXDAvregDyjHJY442ZuQAKQQkfrIQ==`,
+		},
+		{
+			name: "testCase-08",
+			args: args{
+				str: `{"pay_method":"OPPO","order_amount":"1","game_product_name":"测试游戏商品名称","game_product_amount":"1"}`,
+				key: "1234567890adfsj2",
+			},
+			want: `IcZsHWoEM36H0ZP5y9LlABaFZ7WOGnL8sY0xgT1/Py1TJ1cPIt4C48XjzXOjxkwMe1WPFcnr494VzvuyJLZ8Dq4HvSlYeD5i9zCaQPGVo43KzO7tC46/enQ/FMse/Xm4/OkCd/JfUIcU4j3sH/Crh3hZbVOc5pF3`,
 		},
 	}
 	for _, tt := range tests {
