@@ -29,7 +29,7 @@ func HmacSha1(s, key string) []byte {
 }
 
 func HmacSha1HexString(s, key string) string {
-	return string(HmacSha1(s, key))
+	return hex.EncodeToString(HmacSha1(s, key))
 }
 
 func HmacSha1Base64(s, key string) string {
