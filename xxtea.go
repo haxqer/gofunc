@@ -1,4 +1,4 @@
-package xxtea
+package gofunc
 
 import (
 	"encoding/base64"

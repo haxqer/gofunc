@@ -1,6 +1,9 @@
 package gofunc
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
 
 func TestChineseIdCardVerify(t *testing.T) {
 	type args struct {
@@ -20,6 +23,8 @@ func TestChineseIdCardVerify(t *testing.T) {
 		{name: "testCase-07", args: args{idCard: "350205198711076036"}, want: true},
 		{name: "testCase-08", args: args{idCard: "513029199006070453"}, want: true},
 		{name: "testCase-08", args: args{idCard: "513029201006070453"}, want: true},
+		{name: "testCase-09", args: args{idCard: "32062419760212671X"}, want: true},
+		{name: "testCase-10", args: args{idCard: "32068319760212671X"}, want: true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -89,6 +94,29 @@ func TestParseChineIdCardAge(t *testing.T) {
 			if got != tt.want {
 				t.Errorf("ParseChineIdCardAge() got = %v, want %v", got, tt.want)
 			}
+		})
+	}
+}
+
+func TestGenBirthDayByAge(t *testing.T) {
+	type args struct {
+		age int
+	}
+	tests := []struct {
+		name string
+		args args
+		want time.Time
+	}{
+		{name: "testCase-01", args: args{age: 1}},
+		{name: "testCase-02", args: args{age: 99}},
+		{name: "testCase-03", args: args{age: 60}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := GenBirthDayByAge(tt.args.age); Age(got) != tt.args.age {
+				t.Errorf("GenBirthDayByAge() = %v", got.Format(time.RFC3339))
+			}
+
 		})
 	}
 }

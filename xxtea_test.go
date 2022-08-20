@@ -1,4 +1,4 @@
-package xxtea
+package gofunc
 
 import "testing"
 
@@ -19,7 +19,7 @@ func TestDecryptString(t *testing.T) {
 				str: "77BY4stkmnKD8UqMJHW4AwJVkSraIs6JzpWsxMw1It1DrrtxuNxCwJ/uqrRP6VhAiALl4FFTfcM9hk/JPA69+G7CX5bXBhJRo623JitDtwI6q5xNu2DXoDY1eY6elJY0T+r2KEFHWWnPuGSBcA/fstYR2zz0bv8VvI3ka9ahy+wVdN4juO7n8sNaow5gaXAi8DI0ME6r2ss1QDuGYbbcg/VbLWLM3P3srnNvMFIrVcSVC8kOUqhPD1+bi11KqljD2aJw9KpmKyvURQf0JnSWOfLidX3gEbGnCraummg9cSUuvAv2i6HX+l47gGyhIlA1IFFj/PyY22fCS2wSyQZvN/93EoWR1T9iC2S1iHwwKkBY5lNQZksGc4ZrwxPrXyoxROODQfaSr+/Ih20e9wJjALGBsI8tMxGJOt8LiCZf8He2lNYeIcri8S8WS42bxBjyHtSUShAKW41JTO7+a2oDXnJ/Nz7nC2Npyt07SuEDBOQ+eFzoxvy14bP9ozehZMAf25eF1QgA8oxzEl9CV6KCPJNQANlPMgmlNa113CmZftR/54Fc1zZxk556qV0ozm4aw+S4yZTCID53KXf3cRJZ4fq9TygnSshMxiqWfE/GE2bLYMenajcusI5UMVIQXEv5tzah1w==",
 				key: "sdb123",
 			},
-			want: `{"code":"200","msg":"成功","responseTm":"20210519145844","data":{"userName":"yy292084","game_name":"道天录","litle_url":null,"privacy_state":"aHR0cDovLj3d3dy5wa2V5LmNuL3BwL3ByaXZhY3kuaHRtbA==","register_state":"aHR0cDovLo3d3dy5wa2V5LmNuL3BwL3Byb3RvY29sLmh0bWw=","sdk_account":null,"sdk_passwd":null,"game_version_verify":"0","generalize_switch":0,"code":null,"msg":null,"responseTm":"20210519145844","csgroup":"856104850","csqq":"519363413","succeed":false},"succeed":true}`,
+			want:    `{"code":"200","msg":"成功","responseTm":"20210519145844","data":{"userName":"yy292084","game_name":"道天录","litle_url":null,"privacy_state":"aHR0cDovLj3d3dy5wa2V5LmNuL3BwL3ByaXZhY3kuaHRtbA==","register_state":"aHR0cDovLo3d3dy5wa2V5LmNuL3BwL3Byb3RvY29sLmh0bWw=","sdk_account":null,"sdk_passwd":null,"game_version_verify":"0","generalize_switch":0,"code":null,"msg":null,"responseTm":"20210519145844","csgroup":"856104850","csqq":"519363413","succeed":false},"succeed":true}`,
 			wantErr: false,
 		},
 		{
@@ -28,7 +28,7 @@ func TestDecryptString(t *testing.T) {
 				str: "PQd4b1V1mvMra6/4qpviMdqinaRCkkWwHMW8p43Ham5tarUfCEFvTb7x3R03+UKbXFSk9A==",
 				key: "sdb123",
 			},
-			want: `{"code":400,"msg":"请求参数错误","data":4}`,
+			want:    `{"code":400,"msg":"请求参数错误","data":4}`,
 			wantErr: false,
 		},
 		{
@@ -37,7 +37,7 @@ func TestDecryptString(t *testing.T) {
 				str: "/San8SE+R5CB4EedL9i2BiEr7VSx2nIHIYkqYeVx4eA85dw9psPwRn4cPBr1naZVWbsoiK1ZfE9u54qyYAJoJo5XWfk=",
 				key: "sdb123",
 			},
-			want: `{"code":400,"msg":"请求参数错误","data":"加解密错误"}`,
+			want:    `{"code":400,"msg":"请求参数错误","data":"加解密错误"}`,
 			wantErr: false,
 		},
 		{
@@ -46,7 +46,7 @@ func TestDecryptString(t *testing.T) {
 				str: "5uANLaE7PEGMZigg3BJ+Ts983og7WiRURN5mU9MPQEn++9o7CEGpEOw/sfztXS/zJHW2yNQvHQ/yN/MX",
 				key: "1234567890adfsjd",
 			},
-			want: `{"code":400,"msg":"请求参数错误","data":"加解密错误"}`,
+			want:    `{"code":400,"msg":"请求参数错误","data":"加解密错误"}`,
 			wantErr: false,
 		},
 		{
@@ -55,7 +55,7 @@ func TestDecryptString(t *testing.T) {
 				str: "XXfPte0LqbUDr/FcYSCxhSPpF6SocPH1NZqAGm9CTeXVjGgqgVYdb9EfD0CEhfvQeg6yXhvFQNxuSqdFyqNYX9rMr+S85O3nppokKQ==",
 				key: "1234567890adfsj1",
 			},
-			want: `{"code":400,"msg":"请求参数错误","data":"加解密错误"}`,
+			want:    `{"code":400,"msg":"请求参数错误","data":"加解密错误"}`,
 			wantErr: false,
 		},
 		{
@@ -64,16 +64,16 @@ func TestDecryptString(t *testing.T) {
 				str: "TDm7Y4h5bdLRHO4BfBEBRkCV9yOYbZYOjqNiSTzjrTWKFzCeRIAdk89/Hgj8vQ/YMmwbd1CuiYHTjHOv632oEaUClbwSLLSZu2r+osKlstNiajFoLUaKyA8CCmMlO5e7Ed38Fz6Lq8tso3fPmABhtFhwJMC8lpBW4V2JkVq6FsLL7gEOJV6PyZtwR13X9THUbcN/uzmaUaJgHgtzt9MlCw==",
 				key: "1234567890adfsjd",
 			},
-			want: ``,
+			want:    ``,
 			wantErr: false,
 		},
 		{
 			name: "testCase-07",
 			args: args{
-				str: "iEE6jUhG/qaFmkNn79HU+EySE0iApPz8jIC/QDQy6vUwStYeUrAImi6Bxdn4yH0naUsFbVRYK2Xh+abx0+E4o5rrkVJX6jSx8KIn6syLldKDLQ0RB05iy8R2R++K23WDEr2DJr+WzbHDFL1MCAP98HTN0tjrxjL1H/aO+Q==",
-				key: "1234567890adfsj2",
+				str: "esyeEbuE9NqDhY6kPYlDG+rm5MYVdpNjVVi5HAbA+I16B8J6PWn7/C0Xk3W1xpWK1CUPnW6U7jVT4Wl6+oT4SGj77YZ5C2Bp",
+				key: "1234567890adfsjd",
 			},
-			want: `{"code":41110,"msg":"第三方登陆接口参数验证错误","data":null}`,
+			want:    `{"code":41110,"msg":"第三方登陆接口参数验证错误","data":null}`,
 			wantErr: false,
 		},
 	}
@@ -154,6 +154,30 @@ func TestEncryptString(t *testing.T) {
 			args: args{
 				str: `{"pay_method":"OPPO","order_amount":"1","game_product_name":"测试游戏商品名称","game_product_amount":"1"}`,
 				key: "1234567890adfsj2",
+			},
+			want: `IcZsHWoEM36H0ZP5y9LlABaFZ7WOGnL8sY0xgT1/Py1TJ1cPIt4C48XjzXOjxkwMe1WPFcnr494VzvuyJLZ8Dq4HvSlYeD5i9zCaQPGVo43KzO7tC46/enQ/FMse/Xm4/OkCd/JfUIcU4j3sH/Crh3hZbVOc5pF3`,
+		},
+		{
+			name: "testCase-09",
+			args: args{
+				str: `{"auth_platform":"VIVO","oauth_code":"_STV1_797e3324f7e3f1a3_797e3324f7e3f1a3_8db97942_Awykia3hpb90kcu3l"}`,
+				key: "1234567890adfsj3",
+			},
+			want: `bLg/ehk1uL3Ua/4tJoU/9MsS8yplbt6chP3sd9ixhJK1o+LJymUXfbTfUKPZLw8OceiuZLVmXRTzaFXFN9I/meTa7EKdU4xhl71qZL1NWW9HAbJthFqSoewJesVikY/wYDJwd0/eRKI3icZ2c7exZJLX0jvWTrdlMym55sgxmjL/sAdyoHZ7QQMNyq5+hqPkXVlHspdvOEeJWCF8Hi4/9cXEiPXDAvregDyjHJY442ZuQAKQQkfrIQ==`,
+		},
+		{
+			name: "testCase-10",
+			args: args{
+				str: `{"auth_platform":"HUAWEI","oauth_code":"CgB6e3x9KkvpJgHZd8JN8L1u1ULR9FU3F4R5OLm+8GtcJ7dHU2qqgZK/pk04fy+u2BjVHmv63VJhoD2mL9SCmVVS8Tw9H68itU0kUR0OsQ=="}`,
+				key: "1234567890adfsj4",
+			},
+			want: `IcZsHWoEM36H0ZP5y9LlABaFZ7WOGnL8sY0xgT1/Py1TJ1cPIt4C48XjzXOjxkwMe1WPFcnr494VzvuyJLZ8Dq4HvSlYeD5i9zCaQPGVo43KzO7tC46/enQ/FMse/Xm4/OkCd/JfUIcU4j3sH/Crh3hZbVOc5pF3`,
+		},
+		{
+			name: "testCase-11",
+			args: args{
+				str: `{"redpack_id":"1","redpack_amount":"100"}`,
+				key: "1234567890adfsjd",
 			},
 			want: `IcZsHWoEM36H0ZP5y9LlABaFZ7WOGnL8sY0xgT1/Py1TJ1cPIt4C48XjzXOjxkwMe1WPFcnr494VzvuyJLZ8Dq4HvSlYeD5i9zCaQPGVo43KzO7tC46/enQ/FMse/Xm4/OkCd/JfUIcU4j3sH/Crh3hZbVOc5pF3`,
 		},
