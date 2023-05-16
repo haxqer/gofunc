@@ -56,6 +56,8 @@ func TestMd5Lower(t *testing.T) {
 		{name: "testCase01", args: args{s: "123"}, want: "202cb962ac59075b964b07152d234b70"},
 		{name: "testCase02", args: args{s: "http://www.mgtv.com/b/291325/2979284.html"}, want: "d0e2109a8ff867ee55f83f8765273ff9"},
 		{name: "testCase03", args: args{s: "abc"}, want: "900150983cd24fb0d6963f7d28e17f72"},
+		{name: "testCase04", args: args{s: "552bb9b6931a38fd132a6faa745f6332&1683628932695&12574478&{}"}, want: "904e3cb189aa2fd1e70f5d7c38584a07"},
+		{name: "testCase05", args: args{s: `e6b3f042f58c043a11f86fbc09e9aba2&1683700669666&12574478&{"longitude":121.424094,"latitude":31.235618,"comeFrom":"mobile","privateDomainActivityId":"","pdUserTag":"","shareTransmit":"","storeTransmit":"%7B%22supportMaxAreaDelivery%22%3Atrue%2C%22trace_id%22%3A%222144060116836994024856456e9703%22%2C%22scheme_id%22%3A%222014532146345279531%22%2C%22subsubchannel%22%3A%22mobile.default.scheme_bf34178265cc4f77929036b6ac3212bc%22%7D","businessType":"","addressId":716977896543801,"addressType":"","v":"10.18.0","eleStoreId":"E17592057841417096434","extraInfo":"%7B%22is_anchor%22%3Afalse%2C%22name_desc%22%3A%22%E5%88%9A%E5%88%9A%E7%9C%8B%E8%BF%87%22%2C%22group_name%22%3A%22%E5%88%9A%E5%88%9A%E7%9C%8B%E8%BF%87%22%2C%22sku_ids%22%3A%5B300000006292401435%5D%2C%22popularity%22%3A0%2C%22type%22%3A%22CUSTOM%22%7D","bookTime":"","addressSelectBy":"system"}`}, want: "30198fe7171a01da0d43f9ef4e8faa81"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -73,4 +75,3 @@ func BenchmarkMd5Lower(b *testing.B) {
 		Md5Lower("http://www.mgtv.com/b/291325/2979284.html")
 	}
 }
-

@@ -4,7 +4,7 @@ import "time"
 
 const (
 	TimerFormat1 = ""
-	)
+)
 
 // timestamp.
 // unit is seconds.
@@ -18,6 +18,10 @@ func TsMs() int64 {
 	return time.Now().UnixNano() / int64(time.Millisecond)
 }
 
+func GetEndOfTime() int64 {
+	n := time.Now()
+	return n.AddDate(0, 1, -n.Day()+1).Unix()
+}
 
 const (
 	_                        = iota
